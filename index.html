@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <!-- CSS -->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+
+        <!-- OwlCarousel -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.carousel.min.css"
+              integrity="sha256-ymMA1/kGhlQxXn0q9DFzHRt3VIY1Eh7BJcEfM3I88a4="
+              crossorigin="anonymous" />
+
+        <!-- OwlCarousel Theme -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.min.css"
+              integrity="sha256-s6pvTzrJkzDdmT05Lr0cJZo1Wig9m5AC8Il63ucl31U="
+              crossorigin="anonymous" />
+
+        <!-- Javascript -->
+        <!-- jQuery -->
+        <script src="//code.jquery.com/jquery-3.1.1.min.js"
+                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+                crossorigin="anonymous"></script>
+
+        <!-- Bootstrap -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+        <!-- OwlCarousel -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"
+                integrity="sha256-Y8l+EeoUOvr8SqEj/gTyjBb8CqhtrA6GU9P4yB+41cE="
+                crossorigin="anonymous"></script>
+
+        <style>
+            .img-avatar{
+                max-width: 360px;
+            }
+
+        </style>
+        <script>
+            $(function() {
+                $.getJSON( 'https://api.github.com/users', function(users) {
+
+                    $.each(users, function( index, user ) {
+                        if(user['type'] === 'User'){
+                            var carouselItemDiv = '<div class="item">' +
+                                    '<img class="img-avatar" src="' + user['avatar_url'] + '" /></div>';
+
+                            $('.owl-carousel').append(carouselItemDiv);
+                        }
+                    });
+
+                    $('.owl-carousel').owlCarousel({
+                        loop: false,
+                        margin: 10,
+                        nav: false,
+                        items: 1,
+                        center: true,
+                        dots: false
+                    });
+
+                    $('.owl-carousel').css('display', 'block')
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme" style="display:none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
